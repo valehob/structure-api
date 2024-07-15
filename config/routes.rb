@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'runs/create'
-  get 'drills/show'
+  get 'drills/:id', to:  'drills#show'
   get 'drills/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
