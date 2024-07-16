@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   post 'runs/create'
-  get 'drills/:id', to:  'drills#show'
+  get 'drills/:id', to: 'drills#show'
+  get 'drills/:id/stats', to: 'drills#stats'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

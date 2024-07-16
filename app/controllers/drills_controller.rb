@@ -11,4 +11,25 @@ class DrillsController < ApplicationController
 
   def index
   end
+
+  def stats
+    @drill = Drill.find_by(id: params[:id])
+    runs = Run.where(drill: @drill)
+    tries = Try.where(run: runs)
+
+    last5runs = runs.last(5).map do |run|
+      run.trys.count{ |element| element.success}
+    end
+
+    perfectRuns = runs.count { |run| run.trys.count == run.trys.count{ |element| element.success} }
+
+    json = {
+      drill: @drill,
+      last5runs: last5runs,
+      perfectRuns: perfectRuns,
+      runCount: runs.count
+    }
+
+    render json: json.to_json
+  end
 end
