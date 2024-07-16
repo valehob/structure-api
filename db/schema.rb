@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_15_154431) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_16_002238) do
   create_table "drills", force: :cascade do |t|
     t.string "name"
     t.text "diagram"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "runs", force: :cascade do |t|
@@ -38,10 +39,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_154431) do
     t.boolean "success"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "runs_id"
+    t.integer "run_id", null: false
+    t.index ["run_id"], name: "index_tries_on_run_id"
+    t.index ["runs_id"], name: "index_tries_on_runs_id"
     t.index ["shot_id"], name: "index_tries_on_shot_id"
   end
 
   add_foreign_key "runs", "drills"
   add_foreign_key "shots", "drills"
+  add_foreign_key "tries", "runs"
   add_foreign_key "tries", "shots"
 end
