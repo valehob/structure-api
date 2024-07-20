@@ -17,7 +17,7 @@ class DrillsController < ApplicationController
     runs = Run.where(drill: @drill)
     tries = Try.where(run: runs)
 
-    last5runs = runs.last(5).map do |run|
+    last5runs = runs.last(5).reverse.map do |run|
       run.trys.count{ |element| element.success}
     end
 
@@ -25,6 +25,7 @@ class DrillsController < ApplicationController
 
     json = {
       drill: @drill,
+      shots: @drill.shots,
       last5runs: last5runs,
       perfectRuns: perfectRuns,
       runCount: runs.count

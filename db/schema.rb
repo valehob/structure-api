@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_16_002238) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_20_101216) do
   create_table "drills", force: :cascade do |t|
     t.string "name"
     t.text "diagram"
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_002238) do
     t.text "diagram"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["drill_id"], name: "index_shots_on_drill_id"
   end
 
@@ -39,10 +40,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_002238) do
     t.boolean "success"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "runs_id"
     t.integer "run_id", null: false
     t.index ["run_id"], name: "index_tries_on_run_id"
-    t.index ["runs_id"], name: "index_tries_on_runs_id"
     t.index ["shot_id"], name: "index_tries_on_shot_id"
   end
 
