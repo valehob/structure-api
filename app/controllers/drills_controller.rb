@@ -10,6 +10,8 @@ class DrillsController < ApplicationController
   end
 
   def index
+    @drills = Drill.all
+    render json: {drills: @drills}
   end
 
   def stats

@@ -207,7 +207,7 @@ drills.each do |drill|
   end
 
   drill[:shots].times do |m|
-    shot = Shot.create(drill: d, name: m.to_s)
+    shot = Shot.create(drill: d, name: (m+1).to_s)
 
     runs.each do |run|
       Try.create(shot: shot, run: run, success: rand > 0.3)
