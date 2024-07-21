@@ -1,20 +1,22 @@
 class RunsController < ApplicationController
   def create
 
-    @run = Run.create(drill: Drill.find(params[:drill_id]))
+    @drill = Drill.find(params[:drill_id])
+    @prev_run = Run.where(drill: @drill).last
+
+
+    correct = params[:form].count {|radio| radio[:success].present? ? radio[:success] : false}
+    percentage = (correct / params[:form].count.to_f * 100).round
+    @run = Run.create(drill: @drill, makes: correct)
+
     tries = []
-
-    p "---------------------"
-
     params[:form].each do |radio|
       try = Try.create(run: @run, shot: Shot.find(radio[:id]), success: radio[:success].present? ? radio[:success] : false)
       tries << try
     end
 
-    correct = tries.count {|try| try.success }
-    percentage = correct / tries.count.to_f * 100
 
-    json = { :tries => tries, :percentage => percentage }.to_json
+    json = { :tries => tries, :makes => correct, :percentage => percentage, :prev_makes => @prev_run.makes }.to_json
 
     render json: json, status: 200
 
