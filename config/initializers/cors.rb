@@ -10,7 +10,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     if Rails.env.development?
       origins 'localhost:3000', 'localhost:3001', 'https://my-app.com'
     else
-      origins 'https://my-app.com'
+      origins 'https://my-app.com', 'localhost:3000', 'localhost:3001'
     end
 
     resource "*",
