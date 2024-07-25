@@ -78,7 +78,6 @@ GEM
     airbrussh (1.5.2)
       sshkit (>= 1.6.1, != 1.7.0)
     base64 (0.2.0)
-    bcrypt_pbkdf (1.1.1)
     bcrypt_pbkdf (1.1.1-x86_64-darwin)
     bigdecimal (3.1.8)
     bootsnap (1.18.3)
@@ -145,9 +144,7 @@ GEM
       net-protocol
     net-ssh (7.2.3)
     nio4r (2.7.3)
-    nokogiri (1.15.6-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.15.6-x86_64-linux)
+    nokogiri (1.16.6-x86_64-darwin)
       racc (~> 1.4)
     psych (5.1.2)
       stringio
@@ -199,7 +196,6 @@ GEM
     reline (0.5.9)
       io-console (~> 0.5)
     sqlite3 (1.7.3-x86_64-darwin)
-    sqlite3 (1.7.3-x86_64-linux)
     sshkit (1.23.0)
       base64
       net-scp (>= 1.1.2)
@@ -217,9 +213,7 @@ GEM
     zeitwerk (2.6.16)
 
 PLATFORMS
-  x86_64-darwin-21
   x86_64-darwin-22
-  x86_64-linux
 
 DEPENDENCIES
   bcrypt_pbkdf (>= 1.0, < 2.0)
@@ -241,4 +235,4 @@ RUBY VERSION
    ruby 3.2.4p170
 
 BUNDLED WITH
-   2.3.10
+   2.4.19
