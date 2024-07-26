@@ -8,9 +8,9 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     if Rails.env.development?
-      origins 'localhost:3000'
+      origins "localhost:3000"
     else
-      origins 'https://structure.rabbitco.de, https://pool.rabbitco.de'
+      origins "https://structure.rabbitco.de", "https://pool.rabbitco.de"
     end
 
     resource "*",
