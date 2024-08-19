@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'drills/:id', to: 'drills#show'
   get 'drills/:id/stats', to: 'drills#stats'
   get 'drills', to: "drills#index"
+  get 'topics', to: "topics#index"
+  get 'topics/:id', to: "topics#show"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
