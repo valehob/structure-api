@@ -1,14 +1,9 @@
 topics = [
- "Potting Ability",
- "Stroke Efficiency",
- "Flat Angles",
- "Cut Angles",
- "Center Table",
-#  "Small Area",
-#  "Wide Area",
-#  "Game Transfer",
-#  "Bank, Kick & Jump",
-#  "Training Games"
+ { id: 1, name: "Potting Ability"},
+ { id: 2, name: "Stroke Efficiency"},
+ { id: 3, name: "Flat Angles"},
+ { id: 4, name: "Cut Angles"},
+ { id: 5, name: "Center Table"}
 ]
 
 levels = [
@@ -20,13 +15,21 @@ levels = [
 TOPICS = []
 topics.each do |topic|
   TOPICS << Topic.create(
-    name: topic
+    name: topic[:name]
   )
 end
 
 levels.each do |level|
-  l = Level.create(level)
-  TOPICS.each do |topic|
-    Drill.create(topic: topic, level: l)
+  Level.create(level)
+end
+
+drills = JSON.parse(File.read("#{Rails.root}/db/seedData.json"))
+
+drills.each do |drill|
+  @level = Level.find(drill["levelOrder"])
+  @topic = Topic.find(drill["topicID"])
+  @drill = Drill.create(topic: @topic, level: @level, diagram: drill["diagram"], name:@topic.name, description: drill["description"])
+  drill["shots"].times do |shot|
+    Shot.create(drill: @drill, name: (shot+1).to_s)
   end
 end

@@ -3,7 +3,7 @@ class RunsController < ApplicationController
 
     @drill = Drill.find(params[:drill_id])
     @prev_run = Run.where(drill: @drill).last
-
+    prev_makes = @prev_run.nil? ? 0 : @prev_run.makes
 
     correct = params[:form].count {|radio| radio[:success].present? ? radio[:success] : false}
     percentage = (correct / params[:form].count.to_f * 100).round
@@ -16,7 +16,7 @@ class RunsController < ApplicationController
     end
 
 
-    json = { :tries => tries, :makes => correct, :percentage => percentage, :prev_makes => @prev_run.makes }.to_json
+    json = { :tries => tries, :makes => correct, :percentage => percentage, :prev_makes => prev_makes }.to_json
 
     render json: json, status: 200
 
