@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users, path: '', path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    registration: 'signup'
+  },
+  controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
   post 'runs/create'
   get 'drills/:id', to: 'drills#show'
   get 'drills/:id/stats', to: 'drills#stats'
