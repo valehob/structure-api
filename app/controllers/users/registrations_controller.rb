@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include RackSessionsFix
   respond_to :json
+  skip_before_action :authorized
   private
 
   def respond_with(current_user, _opts = {})
