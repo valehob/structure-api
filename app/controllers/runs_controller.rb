@@ -7,7 +7,7 @@ class RunsController < ApplicationController
 
     correct = params[:form].count {|radio| radio[:success].present? ? radio[:success] : false}
     percentage = (correct / params[:form].count.to_f * 100).round
-    @run = Run.create(drill: @drill, makes: correct)
+    @run = Run.create(drill: @drill, makes: correct, user_id: @user.id)
 
     tries = []
     params[:form].each do |radio|

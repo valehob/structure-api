@@ -16,7 +16,7 @@ class DrillsController < ApplicationController
 
   def stats
     @drill = Drill.find_by(id: params[:id])
-    runs = Run.where(drill: @drill)
+    runs = Run.where(drill: @drill, user_id: @user.id)
     tries = Try.where(run: runs)
 
     last5runs = runs.last(5).reverse.map do |run|
