@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_24_122636) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_28_090103) do
   create_table "drills", force: :cascade do |t|
     t.string "name"
     t.text "diagram"
@@ -28,6 +28,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_122636) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "progresses", force: :cascade do |t|
+    t.integer "level_id", null: false
+    t.integer "topic_id", null: false
+    t.integer "user_id", null: false
+    t.decimal "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id"], name: "index_progresses_on_level_id"
+    t.index ["topic_id"], name: "index_progresses_on_topic_id"
+    t.index ["user_id"], name: "index_progresses_on_user_id"
   end
 
   create_table "runs", force: :cascade do |t|
@@ -82,6 +94,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_122636) do
 
   add_foreign_key "drills", "levels"
   add_foreign_key "drills", "topics"
+  add_foreign_key "progresses", "levels"
+  add_foreign_key "progresses", "topics"
+  add_foreign_key "progresses", "users"
   add_foreign_key "runs", "drills"
   add_foreign_key "runs", "users"
   add_foreign_key "shots", "drills"
