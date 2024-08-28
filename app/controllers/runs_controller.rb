@@ -3,9 +3,7 @@ class RunsController < ApplicationController
 
     @drill = Drill.find(params[:drill_id])
     @prev_run = Run.where(drill: @drill).last
-    @progress_avg = Run.where(drill: @drill).last(3)
-    p @progress_avg
-    @progress_avg = ((@progress_avg.inject(0.0) { |sum, el| sum + el.makes } / @progress_avg.size) / params[:form].count.to_f * 100).round
+
     prev_makes = @prev_run.nil? ? 0 : @prev_run.makes
 
     correct = params[:form].count {|radio| radio[:success].present? ? radio[:success] : false}
@@ -22,6 +20,9 @@ class RunsController < ApplicationController
     if @progress.nil?
       @progress = Progress.create(user: @user, level: @drill.level, topic: @drill.topic, score: percentage)
     else
+      @progress_avg = Run.where(drill: @drill).last(3)
+      p @progress_avg
+      @progress_avg = ((@progress_avg.inject(0.0) { |sum, el| sum + el.makes } / @progress_avg.size) / params[:form].count.to_f * 100).round
       @progress.score = @progress_avg
       @progress.save
     end
